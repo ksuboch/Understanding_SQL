@@ -16,7 +16,7 @@ GO
 
 -- Продавцы
 CREATE TABLE dbo.Sellers (
-    Snum  INT NOT NULL  -- уникальный номер назначенный каждому продавцу 
+    Snum  INT NOT NULL  -- уникальный номер назначенный каждому продавцу
             CONSTRAINT PK_Sellers_Snum PRIMARY KEY,
 	Sname VARCHAR(25),  -- имя проадвца
     City  VARCHAR(25),  -- расположение продавца
@@ -39,18 +39,18 @@ CREATE TABLE dbo.Customers (
 	City   VARCHAR(25), -- расположение заказчика
 	Rating INT,         -- рейтнг заказчика
 	Snum   INT NOT NULL -- номер продавца, назначенного этому заказчику
-            CONSTRAINT FK_Customers_Snum FOREIGN KEY 
+            CONSTRAINT FK_Customers_Snum FOREIGN KEY
             REFERENCES dbo.Sellers(Snum)
 );
 
 INSERT INTO dbo.Customers(Cnum, Cname, City, Rating, Snum) VALUES
-	(2001, 'Hoffman' , 'London' , 100, 1001),
-	(2002, 'Giovanni', 'Rome'   , 200, 1003),
-	(2003, 'Liu'     , 'SanJose', 200, 1002),
-	(2004, 'Grass'   , 'Berlin' , 300, 1002),
-	(2006, 'Clemens' , 'London' , 100, 1001),
-	(2008, 'Cisneros', 'SanJose', 300, 1007),
-	(2007, 'Pereira' , 'Rome'   , 100, 1004);
+	(2001, 'Hoffman' , 'London'  , 100, 1001),
+	(2002, 'Giovanni', 'Rome'    , 200, 1003),
+	(2003, 'Liu'     , 'SanJose' , 200, 1002),
+	(2004, 'Grass'   , 'Berlin'  , 300, 1002),
+	(2006, 'Clemens' , 'London'  , 100, 1001),
+	(2008, 'Cisneros', 'San Jose', 300, 1007),
+	(2007, 'Pereira' , 'Rome'    , 100, 1004);
 GO
 
 -- Заказы
@@ -60,10 +60,10 @@ CREATE TABLE dbo.Orders (
 	Amt   DECIMAL(12, 2), -- сумма заказа
 	Odate DATE,           -- дата заказа
 	Cnum  INT NOT NULL    -- номер заказчика
-        CONSTRAINT FK_Orders_Cnum FOREIGN KEY 
+        CONSTRAINT FK_Orders_Cnum FOREIGN KEY
         REFERENCES dbo.Customers(Cnum),
 	Snum  INT NOT NULL    -- номер продавца
-        CONSTRAINT FK_Orders_Snum FOREIGN KEY 
+        CONSTRAINT FK_Orders_Snum FOREIGN KEY
         REFERENCES dbo.Sellers(Snum)
 )
 
