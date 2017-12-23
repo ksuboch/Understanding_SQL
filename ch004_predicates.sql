@@ -60,14 +60,15 @@ FROM
 WHERE
     Amt > 1000;
 
--- поля Sname и City для всех продавцов с комиссией более .10
+-- поля Sname и City для всех продавцов из Лондона с комиссией более .10
 SELECT
     Sname,
     City
 FROM
     dbo.Sellers
 WHERE
-    Comm > .10;
+    City = 'London' 
+    AND Comm > .10;
 
 -- все заказчики с рейтингом не более 100, не находящиеся в Риме
 SELECT
