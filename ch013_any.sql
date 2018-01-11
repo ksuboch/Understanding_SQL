@@ -77,3 +77,33 @@ SELECT *
         FROM dbo.Customers inr
         WHERE otr.Rating <= inr.Rating
             AND inr.City = 'Rome');
+
+SELECT *
+    FROM dbo.Customers
+    WHERE Rating >= ALL
+    (SELECT Rating
+        FROM dbo.Customers
+        WHERE Snum = 1002);
+
+SELECT *
+    FROM dbo.Sellers otr
+    WHERE City <> ALL
+    (SELECT City
+        FROM dbo.Customers inr
+        WHERE inr.Snum = otr.Snum);
+
+SELECT *
+    FROM dbo.Orders
+    WHERE Amt > ALL
+    (SELECT Amt
+        FROM dbo.Orders odr, dbo.Customers cst
+        WHERE odr.Cnum = cst.Cnum
+            AND cst.City = 'London');
+
+SELECT *
+    FROM dbo.Orders
+    WHERE Amt >
+    (SELECT MAX(Amt)
+        FROM dbo.Orders odr, dbo.Customers cst
+        WHERE odr.Cnum = cst.Cnum
+            AND cst.City = 'London');
