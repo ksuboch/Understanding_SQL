@@ -46,3 +46,47 @@ SELECT sl.Snum, sl.Sname, 'No Match', Comm
             FROM dbo.Customers)
 
 ORDER BY 2 DESC;
+
+SELECT Cnum, Cname, Rating, 'High'
+    FROM dbo.Customers
+    WHERE Rating >= 200
+
+UNION
+
+SELECT Cnum, Cname, Rating, 'Low'
+    FROM dbo.Customers
+    WHERE Rating < 200;
+
+SELECT Cnum, Cname
+    FROM dbo.Customers cs
+    WHERE 1 <
+        (SELECT COUNT(*)
+            FROM dbo.Orders od
+            WHERE cs.Cnum = od.Cnum)
+
+UNION
+
+SELECT Snum, Sname
+    FROM dbo.Sellers cs
+    WHERE 1 <
+        (SELECT COUNT(*)
+            FROM dbo.Orders od
+            WHERE cs.Snum = od.Snum)
+
+ORDER BY 2;
+
+SELECT Snum
+    FROM dbo.Sellers
+    WHERE City = 'San Jose'
+
+UNION
+
+(SELECT Cnum
+    FROM dbo.Customers
+    WHERE City = 'San Jose'
+
+UNION ALL
+
+SELECT Onum
+    FROM dbo.Orders
+    WHERE Odate = '03/10/1990');
