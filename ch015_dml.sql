@@ -44,3 +44,26 @@ UPDATE dbo.Sellers
 UPDATE dbo.Customers
     SET Rating = NULL
     WHERE City = 'London';
+
+INSERT INTO dbo.Sellers (City, Sname, Comm, Snum)
+    VALUES ('San Jose', 'Bianco', NULL, 1100);
+
+DELETE FROM dbo.Orders
+    WHERE Cnum =
+    (SELECT Cnum
+        FROM dbo.Customers
+        WHERE Cname = 'Clemens');
+
+UPDATE dbo.Customers
+    SET Rating = Rating + 100
+    WHERE City = 'Rome';
+
+UPDATE dbo.Customers
+    SET Snum =
+    (SELECT Snum
+        FROM dbo.Sellers
+        WHERE Sname = 'Motika')
+    WHERE Snum =
+    (SELECT Snum
+        FROM dbo.Sellers
+        WHERE Sname = 'Serres');
