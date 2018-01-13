@@ -69,3 +69,44 @@ DROP VIEW dbo.Ratingcount;
 DROP VIEW dbo.Totalforday;
 DROP VIEW dbo.Nameorders;
 DROP VIEW dbo.Elitesalesforce;
+GO
+
+CREATE VIEW Topcust
+    AS SELECT *
+    FROM dbo.Customers
+    WHERE Rating =
+        (SELECT MAX(Rating)
+        FROM dbo.Customers);
+GO
+
+DROP VIEW Topcust
+GO
+
+CREATE VIEW Citysnum
+    AS SELECT City, COUNT(DISTINCT Snum)
+    FROM dbo.Sellers;
+GO
+
+
+DROP VIEW Citysnum;
+GO
+
+CREATE VIEW Avgamt (Sname, Avgamt, Sumamt)
+    AS SELECT Sname, AVG(Amt), SUM(Amt)
+    FROM dbo.Orders, dbo.Sellers
+    WHERE dbo.Orders.Snum = dbo.Sellers.Snum
+    GROUP BY Sname;
+GO
+
+DROP VIEW Avgamt;
+GO
+
+CREATE VIEW Goodseller (Snum, Cnt)
+    AS SELECT Snum, COUNT(*)
+    FROM dbo.Orders
+    GROUP BY Snum
+    HAVING COUNT(*) > 1;
+GO
+
+DROP VIEW Goodseller;
+GO
