@@ -60,3 +60,9 @@ CREATE TABLE dbo.Sale
      City  char(10) DEFAULT 'New York',
      Comm  decimal CHECK (Comm < 1));
 
+CREATE TABLE dbo.Salesman (
+    Snum  INT NOT NULL PRIMARY KEY,
+	Sname VARCHAR(25) CHECK (Sname BETWEEN 'A' AND 'M') ,
+    City  VARCHAR(25),
+    Comm  DECIMAL(4, 2) NOT NULL DEFAULT .1
+);
