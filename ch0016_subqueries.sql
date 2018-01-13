@@ -62,3 +62,17 @@ UPDATE dbo.Sellers
                 (SELECT MIN(Amt)
                     FROM dbo.Orders b
                     WHERE a.Odate = b.Odate));
+
+DELETE FROM dbo.Customers
+    WHERE NOT EXISTS
+        (SELECT *
+            FROM dbo.Orders
+            WHERE dbo.Customers.Cnum = dbo.Orders.Cnum);
+
+UPDATE dbo.Sellers
+    SET Comm = Comm * 1.2
+    WHERE 3000 <
+        (SELECT SUM(Amt)
+            FROM dbo.Orders
+            WHERE dbo.Orders.Snum = dbo.Sellers.Snum)
+    AND Comm * 1.2 < 1;
